@@ -22,13 +22,14 @@ export default function HomeScreen() {
             <Icon name="reorder" size={30} color={"white"} style={{}} />
             <Icon name="search" size={30} color={"white"} style={{}} />
           </View>
-          <View style={{
-            paddingTop:50
-          }}>
-            <Image 
-            source={
-                require( '../assets/image/deliveryman.png')} 
-            style={{width:200, height:200}}
+          <View
+            style={{
+              paddingTop: 50,
+            }}
+          >
+            <Image
+              source={require("../assets/image/deliveryman.png")}
+              style={{ width: 250, height: 200 }}
             />
           </View>
         </View>
@@ -65,15 +66,89 @@ export default function HomeScreen() {
           </View>
           <View style={styles.ListItems}>
             <View style={styles.item}>
-              <Text>Foto 01</Text>
+              <Image
+                source={require("../assets/image/cheesseburger.png")}
+                style={{
+                  width: 80,
+                  height: 80,
+                  paddingTop: 0,
+                }}
+              />
               <Text style={{ fontWeight: "bold", color: "#dcdcdc" }}>
                 Creesse Burger
               </Text>
+              <View style={{ flexDirection: "row" }}>
+                <Icon 
+                name="star" 
+                size={25} 
+                color={"white"} />
+                <Icon 
+                name="star" 
+                size={25} 
+                color={"white"} />
+                <Icon 
+                name="star" 
+                size={25} 
+                color={"white"} />
+                <Icon 
+                name="star-half" 
+                size={25} 
+                color={"white"} />
+                <Icon name="star" size={25} style={{}} />
+              </View>
+              <Text
+                style={{
+                  backgroundColor: "white",
+                  padding: 2,
+                  borderRadius: 5,
+                }}
+              >
+                R$ 40{" "}
+              </Text>
             </View>
             <View style={styles.item}>
-              <Text>Foto 02</Text>
+              <Image
+                source={require("../assets/image/cheesyburger.png")}
+                style={{
+                  width: 80,
+                  height: 80,
+                  paddingTop: 0,
+                }}
+              />
+
               <Text style={{ fontWeight: "bold", color: "#dcdcdc" }}>
                 Chezzy Burger
+              </Text>
+              <View style={{ flexDirection: "row" }}>
+                <Icon 
+                name="star" 
+                size={25} 
+                color={"white"} />
+                <Icon 
+                name="star" 
+                size={25} 
+                color={"white"} />
+                <Icon 
+                name="star" 
+                size={25} 
+                color={"white"} />
+                <Icon 
+                name="star-half" 
+                size={25} 
+                color={"white"} />
+                <Icon 
+                name="star" 
+                size={25} 
+                style={{}} />
+              </View>
+              <Text
+                style={{
+                  backgroundColor: "white",
+                  padding: 2,
+                  borderRadius: 5,
+                }}
+              >
+                R$ 35{" "}
               </Text>
             </View>
           </View>
@@ -133,11 +208,12 @@ const styles = StyleSheet.create({
   },
   item: {
     backgroundColor: "#9377C6",
-    height: 150,
-    width: 120,
+    height: 180,
+    width: 150,
     borderRadius: 20,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+    flexDirection: "column",
   },
   navbar: {
     justifyContent: "space-between",
