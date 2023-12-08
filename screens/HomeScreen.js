@@ -5,7 +5,7 @@ import { Image } from "react-native-elements";
 import { TouchableOpacity } from "react-native";
 import Modal from "react-native-modal";
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -140,6 +140,7 @@ export default function HomeScreen() {
                 <View key={index} style={styles.item}>
                   <TouchableOpacity
                     onPress={() => handleCategoryPress(burger.name)}
+                    
                   >
                     <Image
                       source={require("../assets/image/cheesseburger.png")}
@@ -190,24 +191,49 @@ export default function HomeScreen() {
         </View>
       </View>
       {/* Modal */}
-      <Modal isVisible={isModalVisible} style={{ margin: 0 }} onBackdropPress={() => setModalVisible(false)}>
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <View style={{ backgroundColor: 'white', padding: 20, borderRadius: 10 }}>
-      <Text>Quantidade: 1</Text>
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
-        <TouchableOpacity>
-          <Text style={{ fontSize: 20, color: 'green' }}>+</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={{ fontSize: 20, color: 'red' }}>-</Text>
-        </TouchableOpacity>
-      </View>
-      <TouchableOpacity style={{ backgroundColor: 'blue', padding: 10, borderRadius: 5, marginTop: 10 }}>
-        <Text style={{ color: 'white', textAlign: 'center' }}>Add to bag</Text>
-      </TouchableOpacity>
-    </View>
-  </View>
-</Modal>
+      <Modal
+        isVisible={isModalVisible}
+        style={{ margin: 0 }}
+        onBackdropPress={() => setModalVisible(false)}
+      >
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <View
+            style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}
+          >
+            <Text>Quantidade: 1</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 10,
+              }}
+            >
+              <TouchableOpacity>
+                <Text style={{ fontSize: 20, color: "green" }}>+</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Text style={{ fontSize: 20, color: "red" }}>-</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={{
+                backgroundColor: "blue",
+                padding: 10,
+                borderRadius: 5,
+                marginTop: 10,
+              }}
+            >
+              <Text style={{ color: "white", textAlign: "center" }}
+                onPress={()=>navigation.navigate('Cart')}>
+               
+                Add to bag
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 }
