@@ -1,31 +1,25 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Button } from "react-native";
 import { Icon } from "react-native-elements/dist/icons/Icon";
 import { Image } from "react-native-elements";
 import { TouchableOpacity } from "react-native";
-import Modal from "react-native-modal";
+import { useMyContext } from "../MyContext";
 
-export default function HomeScreen({navigation}) {
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [isModalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+export default function HomeScreen({ navigation }) {
+  const { addToCart, delToCart, cart } = useMyContext();
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const getProductQuantity = (productId) => {
+    const cartItem = cart.find((item) => item.id === productId);
+    return cartItem ? cartItem.quantity : 0;
   };
 
-  const handleCategoryPress = (category) => {
-    setSelectedCategory(category);
-    toggleModal();
-  };
 
-  const isCategorySelected = (category) => {
-    return category === selectedCategory;
-  };
-  const burgers = [
-    { name: "Creesse Burger", price: "R$ 40" },
-    { name: "Chezzy Burger", price: "R$ 35" },
-    { name: "Misto", price: "R$ 14" },
-    { name: "Sanduba bom", price: "R$ 23" },
+  const products = [
+    { id: 1, name: "Creesse Burger", price: "R$ 40" },
+    { id: 2, name: "Chezzy Burger", price: "R$ 35" },
+    { id: 3, name: "Misto", price: "R$ 14" },
+    { id: 4, name: "Sanduba bom", price: "R$ 23" },
   ];
 
   return (
@@ -58,53 +52,29 @@ export default function HomeScreen({navigation}) {
         <View style={styles.content}>
           <View style={styles.topics}>
             <TouchableOpacity
-              onPress={() => handleCategoryPress("burger")}
               style={[
                 styles.category,
-                isCategorySelected("burger") && {
-                  backgroundColor: "#9377C6",
-                  borderRadius: 14,
-                  padding: 5,
-                },
               ]}
             >
               <Text>Burger</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => handleCategoryPress("pizza")}
               style={[
                 styles.category,
-                isCategorySelected("pizza") && {
-                  backgroundColor: "#9377C6",
-                  borderRadius: 14,
-                  padding: 5,
-                },
               ]}
             >
               <Text>Pizza</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => handleCategoryPress("pasta")}
               style={[
                 styles.category,
-                isCategorySelected("pasta") && {
-                  backgroundColor: "#9377C6",
-                  borderRadius: 14,
-                  padding: 5,
-                },
               ]}
             >
               <Text>Pasta</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => handleCategoryPress("popular")}
               style={[
                 styles.category,
-                isCategorySelected("popular") && {
-                  backgroundColor: "#9377C6",
-                  borderRadius: 14,
-                  padding: 5,
-                },
               ]}
             >
               <Text>Popular</Text>
@@ -136,11 +106,13 @@ export default function HomeScreen({navigation}) {
           </View>
           <View style={styles.ListItems}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {burgers.map((burger, index) => (
+              {products.map((product, index) => (
                 <View key={index} style={styles.item}>
                   <TouchableOpacity
-                    onPress={() => handleCategoryPress(burger.name)}
-                    
+                    style={{
+                      alignItems: "center",
+                    }}
+
                   >
                     <Image
                       source={require("../assets/image/cheesseburger.png")}
@@ -151,28 +123,72 @@ export default function HomeScreen({navigation}) {
                       }}
                     />
                     <Text style={{ fontWeight: "bold", color: "#dcdcdc" }}>
-                      {burger.name}
+                      {product.name}
                     </Text>
                     <View style={{ flexDirection: "row" }}>
-                      <Icon name="star" size={25} color={"white"} />
-                      <Icon name="star" size={25} color={"white"} />
-                      <Icon name="star" size={25} color={"white"} />
-                      <Icon name="star-half" size={25} color={"white"} />
-                      <Icon name="star" size={25} style={{}} />
+                      <Icon name="star" size={15} color={"white"} />
+                      <Icon name="star" size={15} color={"white"} />
+                      <Icon name="star" size={15} color={"white"} />
+                      <Icon name="star-half" size={15} color={"white"} />
+                      <Icon name="star" size={15} style={{}} />
                     </View>
+                    {/*---------------------------------------- */}
+                    <View style={{
+                      justifyContent: "center",
+                      alignItems: "center",
+                      flexDirection: "row"
+                    }}>
+
+                      <TouchableOpacity
+                        onPress={() => {
+                          delToCart({ ...product, quantity: selectedQuantity });
+                        }}
+                        style={{ padding: 0 }}
+                      >
+                        <Image
+                          source={{
+                            uri: "https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/subtract-circle-red-512.png",
+                          }}
+                          style={{ width: 20, height: 20 }}
+                        />
+                      </TouchableOpacity>
+
+                      <Text style={{ marginLeft: 10 }}>
+                        {getProductQuantity(product.id)}
+                      </Text>
+
+                      <TouchableOpacity
+                        onPress={() => {
+                          addToCart({ ...product, quantity: selectedQuantity });
+                        }}
+                        style={{ padding: 10 }}
+                      >
+                        <Image
+                          source={{
+                            uri: "https://www.clker.com/cliparts/s/7/R/k/j/Z/icon-add.svg.hi.png",
+                          }}
+                          style={{ width: 20, height: 20 }}
+                        />
+                      </TouchableOpacity>
+
+                    </View>
+                    {/*---------------------------------------- */}
                     <Text
                       style={{
                         backgroundColor: "white",
                         padding: 2,
                         borderRadius: 5,
+                        width: 50
                       }}
                     >
-                      {burger.price}
+                      {product.price}
                     </Text>
                   </TouchableOpacity>
+
                 </View>
               ))}
             </ScrollView>
+
           </View>
           <View style={styles.navbar}>
             <TouchableOpacity>
@@ -190,50 +206,6 @@ export default function HomeScreen({navigation}) {
           </View>
         </View>
       </View>
-      {/* Modal */}
-      <Modal
-        isVisible={isModalVisible}
-        style={{ margin: 0 }}
-        onBackdropPress={() => setModalVisible(false)}
-      >
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <View
-            style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}
-          >
-            <Text>Quantidade: 1</Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 10,
-              }}
-            >
-              <TouchableOpacity>
-                <Text style={{ fontSize: 20, color: "green" }}>+</Text>
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Text style={{ fontSize: 20, color: "red" }}>-</Text>
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity
-              style={{
-                backgroundColor: "blue",
-                padding: 10,
-                borderRadius: 5,
-                marginTop: 10,
-              }}
-            >
-              <Text style={{ color: "white", textAlign: "center" }}
-                onPress={()=>navigation.navigate('Cart')}>
-               
-                Add to bag
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
     </View>
   );
 }
@@ -276,13 +248,15 @@ const styles = StyleSheet.create({
   },
   ListItems: {
     paddingTop: 30,
+    paddingBottom: 30,
     justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "row",
+    paddingBottom: 20,
   },
   item: {
     backgroundColor: "#9377C6",
-    height: 180,
+    height: 200,
     width: 150,
     borderRadius: 20,
     alignItems: "center",

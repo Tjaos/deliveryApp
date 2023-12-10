@@ -1,89 +1,92 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Icon } from "react-native-elements/dist/icons/Icon";
-import { TouchableOpacity } from "react-native";
-
+import {
+  View,
+  Text,
+  Button,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { useMyContext } from "../MyContext"; // Certifique-se de substituir 'seuArquivo' pelo caminho correto
 export default function CartScreen() {
-  return (
-    <View style={styles.container}>
-      <View style={styles.background}>
-        <View style={styles.content}>
-          <View style={styles.topics}>
-            <View style={{ width: "99%" }}>
-              <View
-                style={{
-                  width: "100%",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start",
-                  flexDirection: "row",
-                }}
-              >
-                <Icon name="reorder" size={30} color={"white"} style={{}} />
-                <Icon
-                  name="shopping_cart"
-                  size={30}
-                  color={"white"}
-                  style={{}}
-                />
-              </View>
-            </View>
-            <View></View>
-          </View>
-        </View>
 
-        <View style={styles.navbar}>
-          <TouchableOpacity>
-            <Icon name="home" size={25} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Icon name="search" size={25} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Icon name="notifications" size={25} />
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Icon name="person" size={25} />
-          </TouchableOpacity>
-        </View>
+  const { addToCart, delToCart, cart, removeFromCart } = useMyContext();
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+
+  const getProductQuantity = (productId) => {
+    const cartItem = cart.find((item) => item.id === productId);
+    return cartItem ? cartItem.quantity : 0;
+  };
+
+  const renderCartItem = ({ item }) => (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 10,
+      }}
+    >
+      <View style={{ flex: 1 }}>
+        <Text>
+          {item.name} - ${item.price}
+        </Text>
+      </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <TouchableOpacity
+          onPress={() => {
+            removeFromCart(item.id);
+          }}
+          style={{ padding: 10 }}
+        >
+          <Image
+            source={{
+              uri: "https://cdn-icons-png.flaticon.com/512/1828/1828843.png",
+            }}
+            style={{ width: 20, height: 20 }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            delToCart({ ...item, quantity: selectedQuantity });
+          }}
+          style={{ padding: 10 }}
+        >
+          <Image
+            source={{
+              uri: "https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/subtract-circle-red-512.png",
+            }}
+            style={{ width: 20, height: 20 }}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            addToCart({ ...item, quantity: selectedQuantity });
+          }}
+          style={{ padding: 10 }}
+        >
+          <Image
+            source={{
+              uri: "https://www.clker.com/cliparts/s/7/R/k/j/Z/icon-add.svg.hi.png",
+            }}
+            style={{ width: 20, height: 20 }}
+          />
+        </TouchableOpacity>
+        <Text style={{ marginLeft: 10 }}>
+              Quantidade: {getProductQuantity(item.id)}
+            </Text>
       </View>
     </View>
   );
-}
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FED967",
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  background: {
-    height: "95%",
-    width: "99%",
-    backgroundColor: "#9377C6",
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  navbar: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-    alignItems: "flex-end",
-    padding: 20,
-    width: "100%",
-  },
-  content: {
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: 20,
-    height: "95%",
-    width: "100%",
-  },
-  topics: {
-    justifyContent: "space-evenly",
-    alignItems: "center",
-    flexDirection: "row",
-    padding: 15,
-  },
-});
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Carrinho de Compras</Text>
+      <FlatList
+        data={cart}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderCartItem}
+      />
+    </View>
+  );
+};
+
