@@ -5,15 +5,13 @@ import { Image } from "react-native-elements";
 import { TouchableOpacity } from "react-native";
 import { useMyContext } from "../MyContext";
 
-
 export default function HomeScreen({ navigation }) {
   const { addToCart, delToCart, cart } = useMyContext();
-  const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const [selectedQuantity, setSelectedQuantity] = useState(0);
   const getProductQuantity = (productId) => {
     const cartItem = cart.find((item) => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
   };
-
 
   const products = [
     { id: 1, name: "Creesse Burger", price: "R$ 40" },
@@ -51,32 +49,16 @@ export default function HomeScreen({ navigation }) {
         </View>
         <View style={styles.content}>
           <View style={styles.topics}>
-            <TouchableOpacity
-              style={[
-                styles.category,
-              ]}
-            >
+            <TouchableOpacity style={[styles.category]}>
               <Text>Burger</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.category,
-              ]}
-            >
+            <TouchableOpacity style={[styles.category]}>
               <Text>Pizza</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.category,
-              ]}
-            >
+            <TouchableOpacity style={[styles.category]}>
               <Text>Pasta</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.category,
-              ]}
-            >
+            <TouchableOpacity style={[styles.category]}>
               <Text>Popular</Text>
             </TouchableOpacity>
           </View>
@@ -108,11 +90,10 @@ export default function HomeScreen({ navigation }) {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {products.map((product, index) => (
                 <View key={index} style={styles.item}>
-                  <TouchableOpacity
+                  <View
                     style={{
                       alignItems: "center",
                     }}
-
                   >
                     <Image
                       source={require("../assets/image/cheesseburger.png")}
@@ -133,12 +114,13 @@ export default function HomeScreen({ navigation }) {
                       <Icon name="star" size={15} style={{}} />
                     </View>
                     {/*---------------------------------------- */}
-                    <View style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      flexDirection: "row"
-                    }}>
-
+                    <View
+                      style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        flexDirection: "row",
+                      }}
+                    >
                       <TouchableOpacity
                         onPress={() => {
                           delToCart({ ...product, quantity: selectedQuantity });
@@ -170,25 +152,39 @@ export default function HomeScreen({ navigation }) {
                           style={{ width: 20, height: 20 }}
                         />
                       </TouchableOpacity>
-
                     </View>
                     {/*---------------------------------------- */}
-                    <Text
+                    <View
                       style={{
-                        backgroundColor: "white",
-                        padding: 2,
-                        borderRadius: 5,
-                        width: 50
+                        flexDirection: "row",
+                        alignItems: "center",
+                        width: 130,
+                        justifyContent: "space-around",
                       }}
                     >
-                      {product.price}
-                    </Text>
-                  </TouchableOpacity>
-
+                      <Text
+                        style={{
+                          backgroundColor: "white",
+                          padding: 2,
+                          borderRadius: 5,
+                          width: 50,
+                        }}
+                      >
+                        {product.price}
+                      </Text>
+                      <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
+                        <Image
+                          source={{
+                            uri: "https://cdn-icons-png.flaticon.com/512/126/126510.png",
+                          }}
+                          style={{ width: 25, height: 25, padding: 0 }}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
                 </View>
               ))}
             </ScrollView>
-
           </View>
           <View style={styles.navbar}>
             <TouchableOpacity>
