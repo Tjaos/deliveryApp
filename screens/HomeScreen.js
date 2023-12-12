@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Button } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Icon } from "react-native-elements/dist/icons/Icon";
 import { Image } from "react-native-elements";
 import { TouchableOpacity } from "react-native";
@@ -7,17 +7,17 @@ import { useMyContext } from "../MyContext";
 
 export default function HomeScreen({ navigation }) {
   const { addToCart, delToCart, cart } = useMyContext();
-  const [selectedQuantity, setSelectedQuantity] = useState(0);
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
   const getProductQuantity = (productId) => {
     const cartItem = cart.find((item) => item.id === productId);
     return cartItem ? cartItem.quantity : 0;
   };
 
   const products = [
-    { id: 1, name: "Creesse Burger", price: "R$ 40" },
-    { id: 2, name: "Chezzy Burger", price: "R$ 35" },
-    { id: 3, name: "Misto", price: "R$ 14" },
-    { id: 4, name: "Sanduba bom", price: "R$ 23" },
+    { id: 1, name: "Creesse Burger", price: 40, img: "../assets/image/cheesseburger.png" },
+    { id: 2, name: "Chezzy Burger", price: 35, img: "../assets/image/cheesseburger.png" },
+    { id: 3, name: "Misto Presunto", price: 14, img: "../assets/image/cheesseburger.png" },
+    { id: 4, name: "Sanduba bom", price: 23, img: "../assets/image/cheesseburger.png" },
   ];
 
   return (
@@ -83,7 +83,7 @@ export default function HomeScreen({ navigation }) {
                 paddingTop: 15,
               }}
             >
-              2/10
+              3/10
             </Text>
           </View>
           <View style={styles.ListItems}>
@@ -127,11 +127,12 @@ export default function HomeScreen({ navigation }) {
                         }}
                         style={{ padding: 0 }}
                       >
-                        <Image
-                          source={{
-                            uri: "https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes/128/subtract-circle-red-512.png",
-                          }}
-                          style={{ width: 20, height: 20 }}
+                        <Icon
+                        name="remove"
+                        size={25}
+                        color={"red"}
+                        backgroundColor={"white"}
+                        borderRadius={15}
                         />
                       </TouchableOpacity>
 
@@ -145,11 +146,12 @@ export default function HomeScreen({ navigation }) {
                         }}
                         style={{ padding: 10 }}
                       >
-                        <Image
-                          source={{
-                            uri: "https://www.clker.com/cliparts/s/7/R/k/j/Z/icon-add.svg.hi.png",
-                          }}
-                          style={{ width: 20, height: 20 }}
+                        <Icon
+                        name="add"
+                        size={25}
+                        color={"purple"}
+                        backgroundColor={"white"}
+                        borderRadius={15}
                         />
                       </TouchableOpacity>
                     </View>
@@ -170,7 +172,7 @@ export default function HomeScreen({ navigation }) {
                           width: 50,
                         }}
                       >
-                        {product.price}
+                         R$ {product.price}
                       </Text>
                       <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
                         <Image
@@ -222,7 +224,7 @@ const styles = StyleSheet.create({
     width: "99%",
   },
   background: {
-    height: "95%",
+    height: "97%",
     width: "99%",
     backgroundColor: "#9377C6",
     borderRadius: 20,
