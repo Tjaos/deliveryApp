@@ -14,10 +14,10 @@ export default function HomeScreen({ navigation }) {
   };
 
   const products = [
-    { id: 1, name: "Creesse Burger", price: 40, img: "../assets/image/cheesseburger.png" },
-    { id: 2, name: "Chezzy Burger", price: 35, img: "../assets/image/cheesseburger.png" },
-    { id: 3, name: "Misto Presunto", price: 14, img: "../assets/image/cheesseburger.png" },
-    { id: 4, name: "Sanduba bom", price: 23, img: "../assets/image/cheesseburger.png" },
+    { id: 1, name: "Creesse Burger", price: 40 },
+    { id: 2, name: "Chezzy Burger", price: 35 },
+    { id: 3, name: "Misto Presunto", price: 14 },
+    { id: 4, name: "Sanduba bom", price: 23 },
   ];
 
   return (
@@ -128,11 +128,11 @@ export default function HomeScreen({ navigation }) {
                         style={{ padding: 0 }}
                       >
                         <Icon
-                        name="remove"
-                        size={25}
-                        color={"red"}
-                        backgroundColor={"white"}
-                        borderRadius={15}
+                          name="remove"
+                          size={25}
+                          color={"red"}
+                          backgroundColor={"white"}
+                          borderRadius={15}
                         />
                       </TouchableOpacity>
 
@@ -147,11 +147,11 @@ export default function HomeScreen({ navigation }) {
                         style={{ padding: 10 }}
                       >
                         <Icon
-                        name="add"
-                        size={25}
-                        color={"purple"}
-                        backgroundColor={"white"}
-                        borderRadius={15}
+                          name="add"
+                          size={25}
+                          color={"purple"}
+                          backgroundColor={"white"}
+                          borderRadius={15}
                         />
                       </TouchableOpacity>
                     </View>
@@ -172,9 +172,11 @@ export default function HomeScreen({ navigation }) {
                           width: 50,
                         }}
                       >
-                         R$ {product.price}
+                        R$ {product.price}
                       </Text>
-                      <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
+                      <TouchableOpacity
+                        onPress={() => navigation.navigate("Cart")}
+                      >
                         <Image
                           source={{
                             uri: "https://cdn-icons-png.flaticon.com/512/126/126510.png",

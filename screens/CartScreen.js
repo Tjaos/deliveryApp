@@ -5,9 +5,9 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
-import { useMyContext } from "../MyContext"; 
+import { useMyContext } from "../MyContext";
 import { Icon } from "react-native-elements";
 
 export default function CartScreen({ navigation }) {
@@ -43,21 +43,23 @@ export default function CartScreen({ navigation }) {
   const renderCartItem = ({ item }) => (
     <View
       style={{
-        flex:1,
+        flex: 1,
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "flex-starts",
         marginBottom: 10,
-        width:"100%"
+        width: "100%",
       }}
     >
-      <View style={{ 
-        flexDirection: "row", 
-        alignContent: "space-between", 
-        justifyContent:"space-between", 
-        width:"100%" }}>
-
-        <View style={{ width:"20%"}}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignContent: "space-between",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        <View style={{ width: "20%" }}>
           <Image
             source={require("../assets/image/cheesseburger.png")}
             style={{
@@ -67,21 +69,39 @@ export default function CartScreen({ navigation }) {
             }}
           />
         </View>
-        <View style={{alignItems:"center", justifyContent:"center", width:"50%"}}>
-          <Text style={{ 
-            fontWeight: "bold",
-            fontSize:20}}>
-            {item.name} 
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            width: "50%",
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 20,
+            }}
+          >
+            {item.name}
           </Text>
         </View>
-        <View style={{alignItems:"flex-end", justifyContent:"flex-end", paddingLeft:50, width:"30%"}}>
-          <Text style={{ 
-            fontWeight: "bold",
-            fontSize:15}}>
-            R${item.price} 
+        <View
+          style={{
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+            paddingLeft: 50,
+            width: "30%",
+          }}
+        >
+          <Text
+            style={{
+              fontWeight: "bold",
+              fontSize: 15,
+            }}
+          >
+            R${item.price}
           </Text>
         </View>
-
       </View>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <TouchableOpacity
@@ -139,33 +159,35 @@ export default function CartScreen({ navigation }) {
           justifyContent: "space-around",
         }}
       >
-        <View   style={{
-          paddingTop:50,
-          paddingLeft:30
-        }}>
-        <Icon
-      
-        name="west"
-        size={25}
-        onPress={() => navigation.navigate("Home")}
-        />
-
+        <View
+          style={{
+            paddingTop: 50,
+            paddingLeft: 30,
+          }}
+        >
+          <Icon
+            name="west"
+            size={25}
+            onPress={() => navigation.navigate("Home")}
+          />
         </View>
-        <Text style={{color:"white", fontSize:25, paddingLeft:30}}>My Order</Text>
+        <Text style={{ color: "white", fontSize: 25, paddingLeft: 30 }}>
+          My Order
+        </Text>
         <View style={styles.topics}>
-            <TouchableOpacity style={[styles.category]}>
-              <Text style={styles.text}>Burger</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.category]}>
-              <Text style={styles.text}>Pizza</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.category]}>
-              <Text style={styles.text}>Pasta</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.category]}>
-              <Text style={styles.text}>Popular</Text>
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity style={[styles.category]}>
+            <Text style={styles.text}>Burger</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.category]}>
+            <Text style={styles.text}>Pizza</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.category]}>
+            <Text style={styles.text}>Pasta</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.category]}>
+            <Text style={styles.text}>Popular</Text>
+          </TouchableOpacity>
+        </View>
         <View
           style={{
             height: "70%",
@@ -180,7 +202,7 @@ export default function CartScreen({ navigation }) {
               fontSize: 20,
               fontWeight: "bold",
               paddingLeft: 50,
-              paddingTop:20
+              paddingTop: 20,
             }}
           >
             The Burger King
@@ -191,27 +213,32 @@ export default function CartScreen({ navigation }) {
             keyExtractor={(item) => item.id.toString()}
             renderItem={renderCartItem}
           />
-          <View style={{
-                width:"100%",
-                height:60, 
-                borderTopWidth:2, 
-                borderTopColor:"gray", 
-                justifyContent:"space-evenly",
-                alignItems:"center", 
+          <View
+            style={{
+              width: "100%",
+              height: 60,
+              borderTopWidth: 2,
+              borderTopColor: "gray",
+              justifyContent: "space-evenly",
+              alignItems: "center",
 
-                flexDirection:"row",
-                }}>
-            <Text style={{fontSize:18, paddingLeft:30}}>
+              flexDirection: "row",
+            }}
+          >
+            <Text style={{ fontSize: 18, paddingLeft: 30 }}>
               Total: R$ {total.toFixed(2)}
             </Text>
-            <View style={{
-                  backgroundColor:"#9377C6",
-                  padding:5,
-                  width:60,
-                  borderRadius:10,
-                  alignItems:"center"
-
-            }}><Text style={{fontWeight:"600", color:"white"}}>Card</Text></View>
+            <View
+              style={{
+                backgroundColor: "#9377C6",
+                padding: 5,
+                width: 60,
+                borderRadius: 10,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ fontWeight: "600", color: "white" }}>Card</Text>
+            </View>
           </View>
         </View>
       </View>
@@ -225,7 +252,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     padding: 15,
-    width:"100%"
+    width: "100%",
   },
   category: {
     padding: 10,
@@ -238,7 +265,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     justifyContent: "space-between",
   },
-  text:{
-    color:"white"
-  }
-})
+  text: {
+    color: "white",
+  },
+});
