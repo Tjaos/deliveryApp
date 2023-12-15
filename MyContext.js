@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 const MyContext = createContext();
 const MyProvider = ({ children }) => {
+
   const [cart, setCart] = useState([]);
   const addToCart = (product) => {
     const existingProductIndex = cart.findIndex(

@@ -14,10 +14,34 @@ export default function HomeScreen({ navigation }) {
   };
 
   const products = [
-    { id: 1, name: "Creesse Burger", price: 40 },
-    { id: 2, name: "Chezzy Burger", price: 35 },
-    { id: 3, name: "Misto Presunto", price: 14 },
-    { id: 4, name: "Sanduba bom", price: 23 },
+    {
+      id: 1,
+      name: "Creesse Burger",
+      price: 40,
+      fotoComida:
+        "https://www.estadao.com.br/resizer/YIBfPUoXUOKRYG7IVo-jptwsSFY=/720x503/filters:format(jpg):quality(80):focal(3070x2285:3080x2295)/cloudfront-us-east-1.images.arcpublishing.com/estadao/L3LYN5Y4MRG6BB47MNHEEXDRGA.jpeg",
+    },
+    {
+      id: 2,
+      name: "Chezzy Burger",
+      price: 35,
+      fotoComida:
+        "https://www.cnnbrasil.com.br/wp-content/uploads/sites/12/2022/12/hamburguer-unsplash.jpg?w=1200&h=1200&crop=1",
+    },
+    {
+      id: 3,
+      name: "Misto Presunto",
+      price: 14,
+      fotoComida:
+        "https://s2-receitas.glbimg.com/rzfwf1xIr6gLOR2vihOTSE4AZaI=/1200x/smart/filters:cover():strip_icc()/i.s3.glbimg.com/v1/AUTH_1f540e0b94d8437dbbc39d567a1dee68/internal_photos/bs/2023/o/2/ysIZvgQtq4Xfw6TTBQOg/hamburguer-de-linguica-com-vinagrete-de-abacaxi-e-molho-de-mostarda-com-mel-do-rodrigo-hilbert-5-menos.jpg",
+    },
+    {
+      id: 4,
+      name: "Sanduba bom",
+      price: 23,
+      fotoComida:
+        "https://www.mundoboaforma.com.br/wp-content/uploads/2020/10/Hamburguer.jpg",
+    },
   ];
 
   return (
@@ -96,11 +120,14 @@ export default function HomeScreen({ navigation }) {
                     }}
                   >
                     <Image
-                      source={require("../assets/image/cheesseburger.png")}
-                      style={{
-                        width: 80,
-                        height: 80,
-                        paddingTop: 0,
+                        style={{
+                          width: 80,
+                          height: 70,
+                          marginTop:10,
+                          borderRadius:15
+                        }}
+                      source={{
+                        uri:`${product.fotoComida}`
                       }}
                     />
                     <Text style={{ fontWeight: "bold", color: "#dcdcdc" }}>

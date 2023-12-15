@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,8 @@ import {
 import { useMyContext } from "../MyContext";
 import { Icon } from "react-native-elements";
 
-export default function CartScreen({ navigation }) {
+
+export default function CartScreen({ navigation, route }) {
   const { addToCart, delToCart, cart } = useMyContext();
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
@@ -38,6 +39,7 @@ export default function CartScreen({ navigation }) {
   };
 
   const total = calculateTotalPrice();
+
   const renderCartItem = ({ item }) => (
     <View
       style={{
@@ -57,13 +59,17 @@ export default function CartScreen({ navigation }) {
           width: "100%",
         }}
       >
+        
         <View style={{ width: "20%" }}>
           <Image
-            source={require("../assets/image/cheesseburger.png")}
+            source={{
+              uri:`${item.fotoComida}`
+            }}
             style={{
               width: 50,
               height: 50,
               paddingTop: 0,
+              borderRadius:15
             }}
           />
         </View>
