@@ -11,7 +11,7 @@ import { useMyContext } from "../MyContext";
 import { Icon } from "react-native-elements";
 
 export default function CartScreen({ navigation }) {
-  const { addToCart, delToCart, cart, removeFromCart } = useMyContext();
+  const { addToCart, delToCart, cart } = useMyContext();
   const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const getProductQuantity = (productId) => {
@@ -20,13 +20,11 @@ export default function CartScreen({ navigation }) {
   };
   const calculateTotalPrice = () => {
     let totalPrice = 0;
-    // Itera cada item do carrinho
     cart.forEach((item) => {
       const price = parseFloat(item.price);
       const quantity = parseInt(item.quantity, 10);
 
       if (!isNaN(price) && !isNaN(quantity)) {
-        // Adiciona o valor total do item ao preço total
         totalPrice += price * quantity;
       } else {
         console.error(
