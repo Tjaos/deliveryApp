@@ -7,12 +7,10 @@ const MyProvider = ({ children }) => {
       (item) => item.id === product.id
     );
     if (existingProductIndex !== -1) {
-      // Se o produto já está no carrinho, aumenta a quantidade
       const updatedCart = [...cart];
       updatedCart[existingProductIndex].quantity += 1;
       setCart(updatedCart);
     } else {
-      // Se o produto não está no carrinho, adiciona com quantidade 1
       setCart([...cart, { ...product, quantity: 1 }]);
     }
   };
@@ -21,7 +19,6 @@ const MyProvider = ({ children }) => {
       (item) => item.id === product.id
     );
     if (existingProductIndex !== -1) {
-      // Se o produto já está no carrinho, aumenta a quantidade
       const updatedCart = [...cart];
       if (updatedCart[existingProductIndex].quantity > 0) {
         updatedCart[existingProductIndex].quantity -= 1;
@@ -31,10 +28,7 @@ const MyProvider = ({ children }) => {
           setCart(updatedCart);
         }
       }
-    } /*else {
-      // Se o produto não está no carrinho, adiciona com quantidade 1
-      setCart([...cart, { ...product, quantity: 0 }]);
-    }*/
+    }
   };
   const removeFromCart = (productId) => {
     const updatedCart = cart

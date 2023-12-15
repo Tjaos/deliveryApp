@@ -93,7 +93,7 @@ export default function CartScreen({ navigation }) {
           <Icon
             name="remove"
             size={20}
-            color={"white"}
+            color={"red"}
             backgroundColor={"red"}
             borderRadius={15}
           />
@@ -107,7 +107,7 @@ export default function CartScreen({ navigation }) {
           <Icon
             name="add"
             size={20}
-            color={"white"}
+            color={"green"}
             backgroundColor={"green"}
             borderRadius={15}
           />
